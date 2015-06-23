@@ -14,7 +14,7 @@
 //step 1 - ciclude the delegate and date source
 
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
-@property (strong, nonatomic) NSArray *icons;
+@property (strong, nonatomic) NSArray *iconSets;
 
 
 @end
@@ -25,9 +25,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 
-    NSArray *iconSet = [IconSet iconSets];
-    IconSet *set = (IconSet *)iconSet[0];
-    self.icons = set.icons ;
+    //we neeed to get the sets to display in table view
+
+    self.iconSets = [IconSet iconSets];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,10 +36,24 @@
     // Dispose of any resources that can be recreated.
 }
 
+//we need to implement the two delegate methods that will allow us to work with the different sections in table view.
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return self.iconSets.count;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+
+    IconSet *set = self.iconSets[section];
+    return set.name;
+}
+
 //step 2. conform the class to the delegate and data source protocols.
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 
-    return self.icons.count;
+    IconSet *set = self.iconSets[section];
+
+    return set.icons.count;
 
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -47,7 +62,9 @@
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
 
-    Icon *icon = self.icons[indexPath.row];
+    IconSet *set = self.iconSets[indexPath.section];
+
+    Icon *icon = set.icons[indexPath.row];
 
     //fill in the cell details.
 
