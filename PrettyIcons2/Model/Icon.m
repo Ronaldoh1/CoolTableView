@@ -7,6 +7,7 @@
 //
 
 #import "Icon.h"
+#import <UIKit/UIKit.h>
 
 @implementation Icon
 

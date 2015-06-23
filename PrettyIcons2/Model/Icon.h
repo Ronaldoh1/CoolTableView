@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, RatingType) {
   RatingTypeUnrated,
@@ -20,7 +21,7 @@ typedef NS_ENUM(NSInteger, RatingType) {
 
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *subtitle;
-@property (strong, nonatomic) UIImage *image;
+@property  UIImage *image;
 @property (assign) RatingType rating;
 
 - (instancetype)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle imageName:(NSString *)imageName;
