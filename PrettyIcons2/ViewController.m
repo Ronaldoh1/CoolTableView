@@ -33,11 +33,67 @@
 
     self.iconSets = [IconSet iconSets ];
 
+    //enable selection during edit mode.
+
+    self.tableView.allowsSelectionDuringEditing =YES;
+
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//in willSelectRowAtIndexPath - this will return the indexPath only it's the last item in the section and it's in editing mode. It will not allow the user to select other cells. This is basically so that if the user taps on the last cell (to add a new icon) no matter where the user taps, the table view will know that the user is trying to add a new item
+
+-(NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    IconSet *set = self.iconSets[indexPath.section];
+
+    //here we're basically saying that if the user taps on a cell that corresponds to an item in the set, we do not return the index path.
+    if ([self isEditing] && indexPath.row < set.icons.count ) {
+        return nil;
+
+
+        //if it's not one of the items in the set, then that means this is the extra cell that the user can tap to add a new cell. So for this we return the indexPath.
+    } else {
+
+        return indexPath;
+    }
+
+}
+
+//We also need to prevent the tapping on the additional cell to trigger a segue. We can check for this in the should prepare for segue.
+//here in shouldPerformSegueWithIdentifier, we check if the identifier is equal to the identifier set have set on storyboard and also check if it's editing mode ...if it is then we do not want to perform the segue. Else we should perform the segue as always.
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+
+    if ([identifier isEqualToString:@"goToDetail"] && [self isEditing]){
+        return NO;
+    }else{
+        return YES;
+    }
+
+}
+
+//didSelectRowAtIndexPath delegate method needs to be overriden. If you want to know which row was selected. We can remove the high light here.
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    //here we remove the cell highlight when you come back from detail vc.
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    //we check the icon set
+    IconSet *set = self.iconSets[indexPath.section];
+
+    //here we're in editing mode and we're beyond the number of icons - so here we're already showing the extra cell.
+    if (indexPath.row >= set.icons.count && [self isEditing]) {
+        [self tableView:tableView commitEditingStyle:UITableViewCellEditingStyleInsert forRowAtIndexPath:indexPath];
+    }
+
+
+
+
 }
 
 //we need to implement the two delegate methods that will allow us to work with the different sections in table view.
