@@ -45,6 +45,51 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+//*******************Moving Rows*************************
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    //if the current indexpath is greater than the count of icons available, that means this is the add icon cell which should not be allowed to move. So we need to check if the current IndexPath is great and if it's in editing mode and return NO; Else return Yes and allow cells to be able to move.
+    IconSet *set = self.iconSets[indexPath.section];
+    if (indexPath.row >= set.icons.count && [self isEditing]) {
+        return NO;
+    }else{
+        return YES;
+    }
+}
+
+//Here you get two indexPaths - the source and the destination.
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
+    IconSet *sourceSet = self.iconSets[sourceIndexPath.section];
+    IconSet *destSet = self.iconSets[destinationIndexPath.section];
+
+    Icon *iconToMove = sourceSet.icons[sourceIndexPath.row];
+
+    //need to check if the source set = destination set. if they are the same we are basically moving the icon to a different stop in the same array.
+    if (sourceSet == destSet) {
+
+        //use the exchange object at index method to change places of each item within the same array.
+        [destSet.icons exchangeObjectAtIndex:destinationIndexPath.row withObjectAtIndex:sourceIndexPath.row];
+
+
+    } else{
+        //else if the source set and destination sets are not the same, then we need to add the icon to the destination set and then remove it from the destination set.
+
+        //1. We need to add our icon to our destination set.
+        [destSet.icons insertObject:iconToMove atIndex:destinationIndexPath.row];
+
+        //2. we need to remove it from our source set.
+        [sourceSet.icons removeObjectAtIndex:sourceIndexPath.row];
+
+
+
+
+    }
+
+
+}
+
+
 //in willSelectRowAtIndexPath - this will return the indexPath only it's the last item in the section and it's in editing mode. It will not allow the user to select other cells. This is basically so that if the user taps on the last cell (to add a new icon) no matter where the user taps, the table view will know that the user is trying to add a new item
 
 -(NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
