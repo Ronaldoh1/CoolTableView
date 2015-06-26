@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "Icon.h"
 #import "IconSet.h"
+#import "IconCell.h"
 
 
 //step 1 - ciclude the delegate and date source
@@ -362,28 +363,43 @@
 
     //create the cell based on prototype.
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-
-    IconSet *set = self.iconSets[indexPath.section];
 
     //Configure the Cell
 
     //here we need to see if the current number of rows are greater than the number of icons to display..and if it's editing mode then we want to display add icon to let the user know that he can tap to add another icon...else the tableview is not in editing mode which means we can just return the number of icons.
-    if(indexPath.row >= set.icons.count && [self isEditing]){
+
+
+    // Create the cell (based on prototype)
+    UITableViewCell *cell = nil;
+
+    // Configure the cell
+    IconSet *set = self.iconSets[indexPath.section];
+    if (indexPath.row >= set.icons.count && [self isEditing]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"NewRowCell" forIndexPath:indexPath];
+
         cell.textLabel.text = @"Add Icon";
         cell.detailTextLabel.text = nil;
         cell.imageView.image = nil;
-    }else{
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"customCell" forIndexPath:indexPath];
+        IconCell *iconCell = (IconCell *)cell;
 
-          Icon *icon = set.icons[indexPath.row];
-        cell.textLabel.text = icon.title;
-        cell.detailTextLabel.text = icon.subtitle;
-        cell.imageView.image = icon.image;
+        Icon *icon = set.icons[indexPath.row];
+        iconCell.titleLabel.text = icon.title;
+        iconCell.subTitleLabel.text = icon.subtitle;
+        iconCell.iconCellImage.image = icon.image;
+        if (icon.rating == RatingTypeAwesome) {
+            iconCell.favoriteImageView.image = [UIImage imageNamed:@"star_sel.png"];
+        } else {
+            iconCell.favoriteImageView.image = [UIImage imageNamed:@"star_uns.png"];
+        }
     }
-
-
-
+    
     return cell;
+
+
+
+
 }
 
 //To let the tableView know that you went to edit mode and that it needs to update its self...you must overide setediting methethod...to tell the tableView everything you want to change.
@@ -424,6 +440,16 @@
         return UITableViewCellEditingStyleInsert;
     } else {
         return UITableViewCellEditingStyleDelete;
+    }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    IconSet *set = self.iconSets[indexPath.section];
+    if (indexPath.row >= set.icons.count && [self isEditing]) {
+        return 40;
+    }else{
+        return 80;
     }
 }
 @end
