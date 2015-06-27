@@ -10,6 +10,7 @@
 #import "Icon.h"
 #import "IconSet.h"
 #import "IconCell.h"
+#import "DetailViewController.h"
 
 
 //step 1 - ciclude the delegate and date source
@@ -452,4 +453,28 @@
         return 80;
     }
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+
+    if ([segue.identifier isEqualToString:@"goToDetail"]) {
+
+        //get a pointer to the destination view controller.
+        DetailViewController *destVC = (DetailViewController *)segue.destinationViewController;
+
+        //get the indexpath for selected cell.
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+
+        //lookup the incon that was selected.First you have to check the section/set and then the icon.
+
+        IconSet *set = self.iconSets[indexPath.section];
+
+        Icon *icon = set.icons[indexPath.row];
+
+
+        destVC.icon = icon;
+
+
+    }
+}
+
 @end

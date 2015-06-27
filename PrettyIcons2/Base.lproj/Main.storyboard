@@ -104,10 +104,10 @@
             </objects>
             <point key="canvasLocation" x="1495" y="357"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="VPj-Fh-32i">
             <objects>
-                <viewController id="JUd-UN-UjQ" sceneMemberID="viewController">
+                <viewController id="JUd-UN-UjQ" customClass="DetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HLb-wO-18j"/>
                         <viewControllerLayoutGuide type="bottom" id="3eN-l2-45y"/>
@@ -115,9 +115,17 @@
                     <view key="view" contentMode="scaleToFill" id="VMk-NM-s34">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RIS-Kb-i89">
+                                <rect key="frame" x="0.0" y="-8" width="320" height="480"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="imageView" destination="RIS-Kb-i89" id="Xfr-hs-u93"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="maa-e2-Im2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

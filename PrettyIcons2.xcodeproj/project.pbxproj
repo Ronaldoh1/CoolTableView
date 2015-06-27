@@ -41,6 +41,7 @@
 		F234372C1B3906F60065D11C /* Icon.m in Sources */ = {isa = PBXBuildFile; fileRef = F23437121B3906F60065D11C /* Icon.m */; };
 		F234372D1B3906F60065D11C /* IconSet.m in Sources */ = {isa = PBXBuildFile; fileRef = F23437141B3906F60065D11C /* IconSet.m */; };
 		F23437301B3D19DA0065D11C /* IconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F234372F1B3D19DA0065D11C /* IconCell.m */; };
+		F23437351B3E01500065D11C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F23437341B3E01500065D11C /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,8 @@
 		F23437141B3906F60065D11C /* IconSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconSet.m; sourceTree = "<group>"; };
 		F234372E1B3D19DA0065D11C /* IconCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconCell.h; sourceTree = "<group>"; };
 		F234372F1B3D19DA0065D11C /* IconCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconCell.m; sourceTree = "<group>"; };
+		F23437331B3E01500065D11C /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		F23437341B3E01500065D11C /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +151,8 @@
 				F234372F1B3D19DA0065D11C /* IconCell.m */,
 				F234372E1B3D19DA0065D11C /* IconCell.h */,
 				F23436DB1B3906ED0065D11C /* Main.storyboard */,
+				F23437331B3E01500065D11C /* DetailViewController.h */,
+				F23437341B3E01500065D11C /* DetailViewController.m */,
 				F23436DE1B3906ED0065D11C /* Images.xcassets */,
 				F23436E01B3906ED0065D11C /* LaunchScreen.xib */,
 				F23436D51B3906ED0065D11C /* PrettyIcons2.xcdatamodeld */,
@@ -356,6 +361,7 @@
 				F234372C1B3906F60065D11C /* Icon.m in Sources */,
 				F23436D71B3906ED0065D11C /* PrettyIcons2.xcdatamodeld in Sources */,
 				F23436D41B3906ED0065D11C /* AppDelegate.m in Sources */,
+				F23437351B3E01500065D11C /* DetailViewController.m in Sources */,
 				F234372D1B3906F60065D11C /* IconSet.m in Sources */,
 				F23437301B3D19DA0065D11C /* IconCell.m in Sources */,
 				F23436DA1B3906ED0065D11C /* ViewController.m in Sources */,
