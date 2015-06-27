@@ -11,6 +11,7 @@
 #import "IconSet.h"
 #import "IconCell.h"
 #import "DetailViewController.h"
+#import "EditViewController.h"
 
 
 //step 1 - ciclude the delegate and date source
@@ -22,6 +23,12 @@
 @end
 
 @implementation ViewController
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillDisappear:YES];
+    [self.tableView reloadData];
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -474,7 +481,27 @@
         destVC.icon = icon;
 
 
+    } else if ([segue.identifier isEqualToString:@"goToEdit"]) {
+
+        //get a pointer to the destination view controller.
+        EditViewController *destVC = (EditViewController *)segue.destinationViewController;
+
+        //get the indexpath for selected cell.
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+
+        //lookup the incon that was selected.First you have to check the section/set and then the icon.
+
+        IconSet *set = self.iconSets[indexPath.section];
+
+        Icon *icon = set.icons[indexPath.row];
+        
+        
+        destVC.icon = icon;
+        
+        
     }
+
+
 }
 
 @end
