@@ -74,6 +74,7 @@
 }
 
 //need to implement the image picker.
+//here you can also take an image. 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
 
     UIImage *image = info[UIImagePickerControllerOriginalImage];
@@ -81,7 +82,7 @@
     self.iconImage.image = image;
 
     [self dismissViewControllerAnimated:YES completion:nil];
-    
+
 
 
 
