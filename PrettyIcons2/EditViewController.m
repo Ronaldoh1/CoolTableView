@@ -9,6 +9,7 @@
 #import "EditViewController.h"
 #import "Icon.h"
 #import "DetailViewController.h"
+#import "RatingTableViewController.h"
 @interface EditViewController ()<UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate   >
 @property (weak, nonatomic) IBOutlet UIImageView *iconImage;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
@@ -47,7 +48,7 @@
 }
 
 -(NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0 && indexPath.section == 0) {
+    if ((indexPath.row == 0 && indexPath.section == 0) ||(indexPath.row == 2 && indexPath.section == 1)){
         return indexPath;
     } else {
         return nil;
@@ -56,7 +57,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
+    if (indexPath.row == 0 && indexPath.section == 0) {
+
     //deselect the cell.
+
 
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 
@@ -69,7 +73,7 @@
 
     [self presentViewController:picker animated:YES completion:nil];
 
-
+    }
 
 }
 
@@ -99,6 +103,9 @@
 
 
 
+    }else if([segue.identifier isEqual:@"goToRating"]){
+        RatingTableViewController *destinationVC = (RatingTableViewController *)segue.destinationViewController;
+        destinationVC.icon = self.icon;
     }
 
 

@@ -38,6 +38,9 @@
         case RatingTypeAwesome:
             return @"Awesome";
             break;
+        default:
+            return @"Unknown";
+            break;
     }
 }
 
