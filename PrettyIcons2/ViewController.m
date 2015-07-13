@@ -451,6 +451,7 @@
     }
 }
 
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     IconSet *set = self.iconSets[indexPath.section];

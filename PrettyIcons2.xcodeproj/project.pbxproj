@@ -42,6 +42,7 @@
 		F234372D1B3906F60065D11C /* IconSet.m in Sources */ = {isa = PBXBuildFile; fileRef = F23437141B3906F60065D11C /* IconSet.m */; };
 		F23437301B3D19DA0065D11C /* IconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F234372F1B3D19DA0065D11C /* IconCell.m */; };
 		F23437351B3E01500065D11C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F23437341B3E01500065D11C /* DetailViewController.m */; };
+		F249D3031B54432500A3BAE7 /* RatingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F249D3021B54432500A3BAE7 /* RatingTableViewController.m */; };
 		F2892DF11B3E52380010D534 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2892DF01B3E52380010D534 /* EditViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +102,8 @@
 		F234372F1B3D19DA0065D11C /* IconCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconCell.m; sourceTree = "<group>"; };
 		F23437331B3E01500065D11C /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		F23437341B3E01500065D11C /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		F249D3011B54432500A3BAE7 /* RatingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingTableViewController.h; sourceTree = "<group>"; };
+		F249D3021B54432500A3BAE7 /* RatingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingTableViewController.m; sourceTree = "<group>"; };
 		F2892DEF1B3E52380010D534 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		F2892DF01B3E52380010D534 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,6 +159,8 @@
 				F234372F1B3D19DA0065D11C /* IconCell.m */,
 				F234372E1B3D19DA0065D11C /* IconCell.h */,
 				F23436DB1B3906ED0065D11C /* Main.storyboard */,
+				F249D3011B54432500A3BAE7 /* RatingTableViewController.h */,
+				F249D3021B54432500A3BAE7 /* RatingTableViewController.m */,
 				F23437331B3E01500065D11C /* DetailViewController.h */,
 				F23437341B3E01500065D11C /* DetailViewController.m */,
 				F23436DE1B3906ED0065D11C /* Images.xcassets */,
@@ -369,6 +374,7 @@
 				F23436D41B3906ED0065D11C /* AppDelegate.m in Sources */,
 				F23437351B3E01500065D11C /* DetailViewController.m in Sources */,
 				F234372D1B3906F60065D11C /* IconSet.m in Sources */,
+				F249D3031B54432500A3BAE7 /* RatingTableViewController.m in Sources */,
 				F23437301B3D19DA0065D11C /* IconCell.m in Sources */,
 				F23436DA1B3906ED0065D11C /* ViewController.m in Sources */,
 				F23436D11B3906ED0065D11C /* main.m in Sources */,

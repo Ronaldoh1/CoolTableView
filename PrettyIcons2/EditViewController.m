@@ -8,7 +8,7 @@
 
 #import "EditViewController.h"
 #import "Icon.h"
-
+#import "DetailViewController.h"
 @interface EditViewController ()<UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate   >
 @property (weak, nonatomic) IBOutlet UIImageView *iconImage;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
@@ -74,7 +74,7 @@
 }
 
 //need to implement the image picker.
-//here you can also take an image. 
+//here you can also take an image.
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
 
     UIImage *image = info[UIImagePickerControllerOriginalImage];
@@ -87,5 +87,22 @@
 
 
 }
+
+//add accessory views
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+
+    if([segue.identifier isEqual:@"goToDetail"]){
+
+        DetailViewController *destinationVC = (DetailViewController *)segue.destinationViewController;
+        destinationVC.icon = self.icon;
+
+
+
+    }
+
+
+}
+
 
 @end
