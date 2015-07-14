@@ -13,6 +13,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Seach For Icons" showsScopeBar="YES" id="Nrm-tu-1hl">
+                            <rect key="frame" x="0.0" y="64" width="320" height="88"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <scopeButtonTitles>
+                                <string>All</string>
+                                <string>Winter</string>
+                                <string>Summer</string>
+                            </scopeButtonTitles>
+                            <connections>
+                                <outlet property="delegate" destination="T5s-fP-BFo" id="bfN-vp-PSr"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="customCell" rowHeight="98" id="uq5-bb-mQY" customClass="IconCell">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -99,8 +112,21 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="34A-Og-oFq"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="rZd-Wc-fbK" id="MSd-x7-91i"/>
+                        <outlet property="searchDisplayViewController" destination="rZd-Wc-fbK" id="7AA-15-E3x"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L5U-5v-IFW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="rZd-Wc-fbK">
+                    <connections>
+                        <outlet property="delegate" destination="T5s-fP-BFo" id="FZF-Q9-6aY"/>
+                        <outlet property="searchBar" destination="Nrm-tu-1hl" id="KIx-ZQ-ABH"/>
+                        <outlet property="searchContentsController" destination="T5s-fP-BFo" id="PqZ-2A-1SF"/>
+                        <outlet property="searchResultsDataSource" destination="T5s-fP-BFo" id="TgZ-o1-LvK"/>
+                        <outlet property="searchResultsDelegate" destination="T5s-fP-BFo" id="yy8-Nn-8FJ"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1326" y="357"/>
         </scene>

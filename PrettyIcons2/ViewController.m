@@ -16,9 +16,11 @@
 
 //step 1 - ciclude the delegate and date source
 
-@interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface ViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate>
 @property (strong, nonatomic) NSArray *iconSets;
+@property NSMutableArray *filteredIcons;
 
+@property (strong, nonatomic) IBOutlet UISearchDisplayController *searchDisplayViewController;
 
 @end
 
@@ -53,6 +55,11 @@
 
     //add the long press recognizer to the table view.
     [self.tableView addGestureRecognizer:longPress];
+
+
+    //initialize the array
+
+    self.filteredIcons = [NSMutableArray new];
 
 
 }
@@ -317,13 +324,26 @@
 //we need to implement the two delegate methods that will allow us to work with the different sections in table view.
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+
+    if (tableView == self.searchDisplayViewController.searchResultsTableView) {
+        return 1;
+
+    }else{
     return self.iconSets.count;
+    }
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
 
-    IconSet *set = self.iconSets[section];
-    return set.name;
+
+    if (tableView == self.searchDisplayViewController.searchResultsTableView) {
+        return nil;
+    }else{
+        IconSet *set = self.iconSets[section];
+        return set.name;
+    }
+
+
 }
 
 //in order to be able to delete an item from the table view you need to implement the following method and checkfor the diting style.
@@ -358,11 +378,19 @@
 
     //adjustment lets us know if we need an aditional row - if we're in editing mode. If we're not in editing mode, then it just returns the number of rows without the adjustment.
 
+    if (tableView == self.searchDisplayViewController.searchResultsTableView) {
+        return  self.filteredIcons.count;
+    }else{
+
+
+
     int adjustment = [self isEditing] ? 1 : 0 ;
 
     IconSet *set = self.iconSets[section];
 
     return set.icons.count + adjustment;
+
+    }
 
 }
 
@@ -375,6 +403,22 @@
     //Configure the Cell
 
     //here we need to see if the current number of rows are greater than the number of icons to display..and if it's editing mode then we want to display add icon to let the user know that he can tap to add another icon...else the tableview is not in editing mode which means we can just return the number of icons.
+    if (tableView == self.searchDisplayViewController.searchResultsTableView) {
+
+          IconCell *iconCell  = [self.tableView dequeueReusableCellWithIdentifier:@"customCell"];
+
+
+        Icon *icon = self.filteredIcons[indexPath.row];
+        iconCell.titleLabel.text = icon.title;
+        iconCell.subTitleLabel.text = icon.subtitle;
+        iconCell.iconCellImage.image = icon.image;
+        if (icon.rating == RatingTypeAwesome) {
+            iconCell.favoriteImageView.image = [UIImage imageNamed:@"star_sel.png"];
+        } else {
+            iconCell.favoriteImageView.image = [UIImage imageNamed:@"star_uns.png"];
+        }
+        return iconCell;
+    }else{
 
 
     // Create the cell (based on prototype)
@@ -402,8 +446,11 @@
             iconCell.favoriteImageView.image = [UIImage imageNamed:@"star_uns.png"];
         }
     }
+
+         return cell;
+    }
     
-    return cell;
+
 
 
 
@@ -505,4 +552,50 @@
 
 }
 
+#pragma mark - Filtereing 
+
+-(void)filterIcons:(NSArray *)icons forSearchText:(NSString *)searchText{
+
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.title contains[c] %@", searchText];
+    [self.filteredIcons addObjectsFromArray:[icons filteredArrayUsingPredicate:predicate]];
+
+}
+
+- (void)filteredContentForSearchText:(NSString *)searchText scopeIndex:(NSInteger)scopeIndex{
+
+    //remove all icons
+    [self.filteredIcons removeAllObjects];
+
+    if (scopeIndex == 0 || scopeIndex == 1) {
+        IconSet *winterSet = (IconSet *)self.iconSets[0];
+        [self filterIcons:winterSet.icons forSearchText:searchText];
+
+    }
+    if (scopeIndex == 0 || scopeIndex == 12) {
+        IconSet *summerSet = (IconSet *)self.iconSets[1];
+        [self filterIcons:summerSet.icons forSearchText:searchText];
+
+    }
+}
+
+#pragma mark - Search Contol Display Delegate Methods.
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
+
+    [self filteredContentForSearchText:searchString scopeIndex:self.searchDisplayViewController.searchBar.selectedScopeButtonIndex];
+
+    return YES;
+
+
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption{
+
+    [self filteredContentForSearchText:self.searchDisplayViewController.searchBar.text scopeIndex:searchOption];
+
+    return YES;
+
+
+
+}
 @end
